@@ -1,0 +1,10 @@
+com\metals\mapper\WjGoodsSpecMapper.class
+com\metals\mapper\WjFavoriteMapper.class
+com\metals\mapper\WjGoodsMapper.class
+com\metals\mapper\WjUserMapper.class
+com\metals\mapper\WjAddressMapper.class
+com\metals\mapper\WjOrderItemMapper.class
+com\metals\mapper\WjOrderMapper.class
+com\metals\mapper\WjCartMapper.class
+com\metals\mapper\WjAdvertMapper.class
+com\metals\mapper\WjCategoryMapper.class

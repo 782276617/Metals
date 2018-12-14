@@ -1,0 +1,553 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.metals.mapper.WjGoodsMapper" >
+  <resultMap id="BaseResultMap" type="com.metals.pojo.WjGoods" >
+    <id column="Id" property="id" jdbcType="VARCHAR" />
+    <result column="cId" property="cid" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="specId" property="specid" jdbcType="INTEGER" />
+    <result column="gkeys" property="gkeys" jdbcType="VARCHAR" />
+    <result column="synopsis" property="synopsis" jdbcType="VARCHAR" />
+    <result column="Image" property="image" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="DECIMAL" />
+    <result column="IsVouch" property="isvouch" jdbcType="INTEGER" />
+    <result column="clickN" property="clickn" jdbcType="INTEGER" />
+    <result column="reviewN" property="reviewn" jdbcType="INTEGER" />
+    <result column="stockN" property="stockn" jdbcType="INTEGER" />
+    <result column="orderN" property="ordern" jdbcType="INTEGER" />
+    <result column="sellersN" property="sellersn" jdbcType="INTEGER" />
+    <result column="sellingN" property="sellingn" jdbcType="INTEGER" />
+    <result column="promotionN" property="promotionn" jdbcType="INTEGER" />
+    <result column="number" property="number" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="gOrder" property="gorder" jdbcType="INTEGER" />
+    <result column="created" property="created" jdbcType="TIMESTAMP" />
+    <result column="updated" property="updated" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.metals.pojo.WjGoods" extends="BaseResultMap" >
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    Id, cId, name, specId, gkeys, synopsis, Image, price, IsVouch, clickN, reviewN, stockN, 
+    orderN, sellersN, sellingN, promotionN, number, status, gOrder, created, updated
+  </sql>
+  <sql id="Blob_Column_List" >
+    content
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.metals.pojo.WjGoodsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from wj_goods
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.metals.pojo.WjGoodsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from wj_goods
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from wj_goods
+    where Id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from wj_goods
+    where Id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.metals.pojo.WjGoodsExample" >
+    delete from wj_goods
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.metals.pojo.WjGoods" >
+    insert into wj_goods (Id, cId, name, 
+      specId, gkeys, synopsis, 
+      Image, price, IsVouch, 
+      clickN, reviewN, stockN, 
+      orderN, sellersN, sellingN, 
+      promotionN, number, status, 
+      gOrder, created, updated, 
+      content)
+    values (#{id,jdbcType=VARCHAR}, #{cid,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, 
+      #{specid,jdbcType=INTEGER}, #{gkeys,jdbcType=VARCHAR}, #{synopsis,jdbcType=VARCHAR}, 
+      #{image,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, #{isvouch,jdbcType=INTEGER}, 
+      #{clickn,jdbcType=INTEGER}, #{reviewn,jdbcType=INTEGER}, #{stockn,jdbcType=INTEGER}, 
+      #{ordern,jdbcType=INTEGER}, #{sellersn,jdbcType=INTEGER}, #{sellingn,jdbcType=INTEGER}, 
+      #{promotionn,jdbcType=INTEGER}, #{number,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
+      #{gorder,jdbcType=INTEGER}, #{created,jdbcType=TIMESTAMP}, #{updated,jdbcType=TIMESTAMP}, 
+      #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.metals.pojo.WjGoods" >
+    insert into wj_goods
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        Id,
+      </if>
+      <if test="cid != null" >
+        cId,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="specid != null" >
+        specId,
+      </if>
+      <if test="gkeys != null" >
+        gkeys,
+      </if>
+      <if test="synopsis != null" >
+        synopsis,
+      </if>
+      <if test="image != null" >
+        Image,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="isvouch != null" >
+        IsVouch,
+      </if>
+      <if test="clickn != null" >
+        clickN,
+      </if>
+      <if test="reviewn != null" >
+        reviewN,
+      </if>
+      <if test="stockn != null" >
+        stockN,
+      </if>
+      <if test="ordern != null" >
+        orderN,
+      </if>
+      <if test="sellersn != null" >
+        sellersN,
+      </if>
+      <if test="sellingn != null" >
+        sellingN,
+      </if>
+      <if test="promotionn != null" >
+        promotionN,
+      </if>
+      <if test="number != null" >
+        number,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="gorder != null" >
+        gOrder,
+      </if>
+      <if test="created != null" >
+        created,
+      </if>
+      <if test="updated != null" >
+        updated,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="cid != null" >
+        #{cid,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="specid != null" >
+        #{specid,jdbcType=INTEGER},
+      </if>
+      <if test="gkeys != null" >
+        #{gkeys,jdbcType=VARCHAR},
+      </if>
+      <if test="synopsis != null" >
+        #{synopsis,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null" >
+        #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="isvouch != null" >
+        #{isvouch,jdbcType=INTEGER},
+      </if>
+      <if test="clickn != null" >
+        #{clickn,jdbcType=INTEGER},
+      </if>
+      <if test="reviewn != null" >
+        #{reviewn,jdbcType=INTEGER},
+      </if>
+      <if test="stockn != null" >
+        #{stockn,jdbcType=INTEGER},
+      </if>
+      <if test="ordern != null" >
+        #{ordern,jdbcType=INTEGER},
+      </if>
+      <if test="sellersn != null" >
+        #{sellersn,jdbcType=INTEGER},
+      </if>
+      <if test="sellingn != null" >
+        #{sellingn,jdbcType=INTEGER},
+      </if>
+      <if test="promotionn != null" >
+        #{promotionn,jdbcType=INTEGER},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="gorder != null" >
+        #{gorder,jdbcType=INTEGER},
+      </if>
+      <if test="created != null" >
+        #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updated != null" >
+        #{updated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.metals.pojo.WjGoodsExample" resultType="java.lang.Integer" >
+    select count(*) from wj_goods
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update wj_goods
+    <set >
+      <if test="record.id != null" >
+        Id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cid != null" >
+        cId = #{record.cid,jdbcType=BIGINT},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.specid != null" >
+        specId = #{record.specid,jdbcType=INTEGER},
+      </if>
+      <if test="record.gkeys != null" >
+        gkeys = #{record.gkeys,jdbcType=VARCHAR},
+      </if>
+      <if test="record.synopsis != null" >
+        synopsis = #{record.synopsis,jdbcType=VARCHAR},
+      </if>
+      <if test="record.image != null" >
+        Image = #{record.image,jdbcType=VARCHAR},
+      </if>
+      <if test="record.price != null" >
+        price = #{record.price,jdbcType=DECIMAL},
+      </if>
+      <if test="record.isvouch != null" >
+        IsVouch = #{record.isvouch,jdbcType=INTEGER},
+      </if>
+      <if test="record.clickn != null" >
+        clickN = #{record.clickn,jdbcType=INTEGER},
+      </if>
+      <if test="record.reviewn != null" >
+        reviewN = #{record.reviewn,jdbcType=INTEGER},
+      </if>
+      <if test="record.stockn != null" >
+        stockN = #{record.stockn,jdbcType=INTEGER},
+      </if>
+      <if test="record.ordern != null" >
+        orderN = #{record.ordern,jdbcType=INTEGER},
+      </if>
+      <if test="record.sellersn != null" >
+        sellersN = #{record.sellersn,jdbcType=INTEGER},
+      </if>
+      <if test="record.sellingn != null" >
+        sellingN = #{record.sellingn,jdbcType=INTEGER},
+      </if>
+      <if test="record.promotionn != null" >
+        promotionN = #{record.promotionn,jdbcType=INTEGER},
+      </if>
+      <if test="record.number != null" >
+        number = #{record.number,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.gorder != null" >
+        gOrder = #{record.gorder,jdbcType=INTEGER},
+      </if>
+      <if test="record.created != null" >
+        created = #{record.created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updated != null" >
+        updated = #{record.updated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.content != null" >
+        content = #{record.content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update wj_goods
+    set Id = #{record.id,jdbcType=VARCHAR},
+      cId = #{record.cid,jdbcType=BIGINT},
+      name = #{record.name,jdbcType=VARCHAR},
+      specId = #{record.specid,jdbcType=INTEGER},
+      gkeys = #{record.gkeys,jdbcType=VARCHAR},
+      synopsis = #{record.synopsis,jdbcType=VARCHAR},
+      Image = #{record.image,jdbcType=VARCHAR},
+      price = #{record.price,jdbcType=DECIMAL},
+      IsVouch = #{record.isvouch,jdbcType=INTEGER},
+      clickN = #{record.clickn,jdbcType=INTEGER},
+      reviewN = #{record.reviewn,jdbcType=INTEGER},
+      stockN = #{record.stockn,jdbcType=INTEGER},
+      orderN = #{record.ordern,jdbcType=INTEGER},
+      sellersN = #{record.sellersn,jdbcType=INTEGER},
+      sellingN = #{record.sellingn,jdbcType=INTEGER},
+      promotionN = #{record.promotionn,jdbcType=INTEGER},
+      number = #{record.number,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=INTEGER},
+      gOrder = #{record.gorder,jdbcType=INTEGER},
+      created = #{record.created,jdbcType=TIMESTAMP},
+      updated = #{record.updated,jdbcType=TIMESTAMP},
+      content = #{record.content,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update wj_goods
+    set Id = #{record.id,jdbcType=VARCHAR},
+      cId = #{record.cid,jdbcType=BIGINT},
+      name = #{record.name,jdbcType=VARCHAR},
+      specId = #{record.specid,jdbcType=INTEGER},
+      gkeys = #{record.gkeys,jdbcType=VARCHAR},
+      synopsis = #{record.synopsis,jdbcType=VARCHAR},
+      Image = #{record.image,jdbcType=VARCHAR},
+      price = #{record.price,jdbcType=DECIMAL},
+      IsVouch = #{record.isvouch,jdbcType=INTEGER},
+      clickN = #{record.clickn,jdbcType=INTEGER},
+      reviewN = #{record.reviewn,jdbcType=INTEGER},
+      stockN = #{record.stockn,jdbcType=INTEGER},
+      orderN = #{record.ordern,jdbcType=INTEGER},
+      sellersN = #{record.sellersn,jdbcType=INTEGER},
+      sellingN = #{record.sellingn,jdbcType=INTEGER},
+      promotionN = #{record.promotionn,jdbcType=INTEGER},
+      number = #{record.number,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=INTEGER},
+      gOrder = #{record.gorder,jdbcType=INTEGER},
+      created = #{record.created,jdbcType=TIMESTAMP},
+      updated = #{record.updated,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.metals.pojo.WjGoods" >
+    update wj_goods
+    <set >
+      <if test="cid != null" >
+        cId = #{cid,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="specid != null" >
+        specId = #{specid,jdbcType=INTEGER},
+      </if>
+      <if test="gkeys != null" >
+        gkeys = #{gkeys,jdbcType=VARCHAR},
+      </if>
+      <if test="synopsis != null" >
+        synopsis = #{synopsis,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null" >
+        Image = #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="isvouch != null" >
+        IsVouch = #{isvouch,jdbcType=INTEGER},
+      </if>
+      <if test="clickn != null" >
+        clickN = #{clickn,jdbcType=INTEGER},
+      </if>
+      <if test="reviewn != null" >
+        reviewN = #{reviewn,jdbcType=INTEGER},
+      </if>
+      <if test="stockn != null" >
+        stockN = #{stockn,jdbcType=INTEGER},
+      </if>
+      <if test="ordern != null" >
+        orderN = #{ordern,jdbcType=INTEGER},
+      </if>
+      <if test="sellersn != null" >
+        sellersN = #{sellersn,jdbcType=INTEGER},
+      </if>
+      <if test="sellingn != null" >
+        sellingN = #{sellingn,jdbcType=INTEGER},
+      </if>
+      <if test="promotionn != null" >
+        promotionN = #{promotionn,jdbcType=INTEGER},
+      </if>
+      <if test="number != null" >
+        number = #{number,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="gorder != null" >
+        gOrder = #{gorder,jdbcType=INTEGER},
+      </if>
+      <if test="created != null" >
+        created = #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updated != null" >
+        updated = #{updated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.metals.pojo.WjGoods" >
+    update wj_goods
+    set cId = #{cid,jdbcType=BIGINT},
+      name = #{name,jdbcType=VARCHAR},
+      specId = #{specid,jdbcType=INTEGER},
+      gkeys = #{gkeys,jdbcType=VARCHAR},
+      synopsis = #{synopsis,jdbcType=VARCHAR},
+      Image = #{image,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DECIMAL},
+      IsVouch = #{isvouch,jdbcType=INTEGER},
+      clickN = #{clickn,jdbcType=INTEGER},
+      reviewN = #{reviewn,jdbcType=INTEGER},
+      stockN = #{stockn,jdbcType=INTEGER},
+      orderN = #{ordern,jdbcType=INTEGER},
+      sellersN = #{sellersn,jdbcType=INTEGER},
+      sellingN = #{sellingn,jdbcType=INTEGER},
+      promotionN = #{promotionn,jdbcType=INTEGER},
+      number = #{number,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      gOrder = #{gorder,jdbcType=INTEGER},
+      created = #{created,jdbcType=TIMESTAMP},
+      updated = #{updated,jdbcType=TIMESTAMP},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where Id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.metals.pojo.WjGoods" >
+    update wj_goods
+    set cId = #{cid,jdbcType=BIGINT},
+      name = #{name,jdbcType=VARCHAR},
+      specId = #{specid,jdbcType=INTEGER},
+      gkeys = #{gkeys,jdbcType=VARCHAR},
+      synopsis = #{synopsis,jdbcType=VARCHAR},
+      Image = #{image,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DECIMAL},
+      IsVouch = #{isvouch,jdbcType=INTEGER},
+      clickN = #{clickn,jdbcType=INTEGER},
+      reviewN = #{reviewn,jdbcType=INTEGER},
+      stockN = #{stockn,jdbcType=INTEGER},
+      orderN = #{ordern,jdbcType=INTEGER},
+      sellersN = #{sellersn,jdbcType=INTEGER},
+      sellingN = #{sellingn,jdbcType=INTEGER},
+      promotionN = #{promotionn,jdbcType=INTEGER},
+      number = #{number,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      gOrder = #{gorder,jdbcType=INTEGER},
+      created = #{created,jdbcType=TIMESTAMP},
+      updated = #{updated,jdbcType=TIMESTAMP}
+    where Id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

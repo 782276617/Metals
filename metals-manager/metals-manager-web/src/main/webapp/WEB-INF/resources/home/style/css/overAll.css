@@ -1,0 +1,7 @@
+/* 卡券修改版 陈漫婷 */
+.listimg{background: url(../../../../assets/images/coupon.png)/*tpa=http://www.0760wj.com/assets/images/coupon.png*/ repeat-x left bottom;background-size: auto 4px;margin-left: 10px;margin-right: 10px;font-family:'Microsoft YaHei'}
+.listimg a.media-left{min-width: 70px;color: #fff;text-align: center;border-right: 1px solid #eee;}
+.listimg .media-body{padding-left: 12px;color:#fff;}
+.listimg .media-body h4{margin-bottom: 8px;margin-top: 2px;}
+.listimg .list-date{color: #f9eeee;}
+.listimg .nonemarg{margin: 0;}
